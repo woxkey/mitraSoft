@@ -1,15 +1,17 @@
-import { call, put, takeEvery } from "redux-saga/effects";
+import { call, put } from "redux-saga/effects";
 import axios from "axios";
-import { getCommentsSuccess } from "./commentState";
+import { getCommentsFailure, getCommentsSuccess } from "./commentState";
 
-function* workGetCommentsFetch() {
-    const comments = yield call(() => axios.get("https://jsonplaceholder.typicode.com/comments"));
-    const commentsData = comments.data;
-    yield put(getCommentsSuccess(commentsData));
-}
-
-function* commentSaga() {
-    yield takeEvery("comments/getCommentsFetch", workGetCommentsFetch);
+function* commentSaga(postId) {
+    try {
+        const comments = yield call(() =>
+            axios.get(`https://jsonplaceholder.typicode.com/comments?postId=${postId}`)
+        );
+        const commentsData = comments.data;
+        yield put(getCommentsSuccess(commentsData));
+    } catch (err) {
+        yield put(getCommentsFailure(err));
+    }
 }
 
 export default commentSaga;

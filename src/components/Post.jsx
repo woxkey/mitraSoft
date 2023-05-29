@@ -1,39 +1,56 @@
 import PropTypes from "prop-types";
 import { Button, Col } from "react-bootstrap";
 import Image from "react-bootstrap/Image";
-import {  useSelector } from "react-redux";
 import "../App.css";
 import { useNavigate } from "react-router-dom";
-
+import axios from "axios";
+import { useState } from "react";
 
 const Post = ({ title, body, avatar, postId, userId }) => {
-    const { comments } = useSelector((state) => state.comments);
+    const [showComments, setShowComments] = useState(false);
+    const [comments, setComments] = useState([]);
     const navigate = useNavigate();
 
     const openComments = () => {
+        setShowComments(!showComments);
+        getCommentsByPost();
+    };
 
-    }
+    const getCommentsByPost = async () => {
+        try {
+            const response = await axios.get(
+                `https://jsonplaceholder.typicode.com/comments?postId=${postId}`
+            );
+            const data = await response.data;
+            setComments(data);
+        } catch (err) {
+            console.log(err);
+        }
+    };
 
     const handleClick = () => {
-        navigate(`/${userId}`)
-    }
+        navigate(`/${userId}`);
+    };
 
     return (
         <Col>
-            <Image className="myAvatar" onClick={handleClick} roundedCircle thumbnail width={40} height={40} src={avatar} alt="avatar" />
+            <Image
+                className="myAvatar"
+                onClick={handleClick}
+                roundedCircle
+                thumbnail
+                width={40}
+                height={40}
+                src={avatar}
+                alt="avatar"
+            />
             <h3>{title}</h3>
             <p>{body}</p>
             <Button onClick={openComments}>Comments</Button>
-            {comments.map((comment) => {
-                return (
-                    comment.postId === postId && (
-                        <div key={comment.id}>
-                            <h4>{comment.name}</h4>
-                            <p>{comment.body}</p>
-                        </div>
-                    )
-                );
-            })}
+            {showComments &&
+                comments.map((comment) => {
+                    return <div key={comment.id}>{comment.name}</div>;
+                })}
         </Col>
     );
 };
@@ -43,7 +60,7 @@ Post.propTypes = {
     body: PropTypes.string.isRequired,
     avatar: PropTypes.string.isRequired,
     postId: PropTypes.number.isRequired,
-    userId: PropTypes.number.isRequired
+    userId: PropTypes.number.isRequired,
 };
 
 export default Post;

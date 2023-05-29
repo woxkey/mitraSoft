@@ -13,7 +13,6 @@ export const userPostsSlice = createSlice({
         getUserPostsSuccess: (state, action) => {
             state.posts = action.payload;
             state.isLoading = false;
-            console.log(action.payload)
         },
         getUserPostsFailure: (state) => {
             state.isLoading = false;
