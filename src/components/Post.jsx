@@ -1,5 +1,5 @@
 import PropTypes from "prop-types";
-import { Button, Col } from "react-bootstrap";
+import { Button } from "react-bootstrap";
 import Image from "react-bootstrap/Image";
 import "../App.css";
 import { useNavigate } from "react-router-dom";
@@ -34,29 +34,37 @@ const Post = ({ title, body, avatar, postId, userId }) => {
     };
 
     return (
-       
-        <Col>
-            <Image
-                className="myAvatar"
-                onClick={handleClick}
-                roundedCircle
-                thumbnail
-                width={40}
-                height={40}
-                src={avatar}
-                alt="avatar"
-            />
-            <h3>{title}</h3>
-            <p>{body}</p>
-            <Button onClick={openComments}>Comments</Button>
-            {showComments &&
-                comments.map((comment) => {
-                    return <div key={comment.id}>
-                        <h5>{comment.email}</h5>
-                        <p>{comment.body}</p>
-                    </div>;
-                })}
-        </Col>
+        <div className="mb-5">
+            <div className="d-flex align-items-center">
+                <Image
+                    className="myAvatar me-3"
+                    onClick={handleClick}
+                    roundedCircle
+                    width={25}
+                    height={25}
+                    src={avatar}
+                    alt="avatar"
+                />
+                <div>
+                    <h3 className="lh-sm myTitle">{title}</h3>
+                    <p className="lh-sm">{body}</p>
+                </div>
+            </div>
+            <Button className="w-100" variant="light" onClick={openComments}>
+                Comments
+            </Button>
+            <div >
+                {showComments &&
+                    comments.map((comment) => {
+                        return (
+                            <div className="px-5 py-3" key={comment.id}>
+                                <h5>{comment.email}</h5>
+                                <p>{comment.body}</p>
+                            </div>
+                        );
+                    })}
+            </div>
+        </div>
     );
 };
 

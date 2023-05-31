@@ -1,3 +1,11 @@
 .myInput, .myAvatar, .myImage{
     cursor: pointer;    
 }
+
+.myTitle::first-letter {
+    text-transform: uppercase;
+}
+
+.myLink {
+    width: fit-content;
+}

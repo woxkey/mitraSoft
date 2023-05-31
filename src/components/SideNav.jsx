@@ -1,25 +1,57 @@
-import { Offcanvas } from "react-bootstrap";
-import PropTypes from "prop-types";
+import { Image, Offcanvas } from "react-bootstrap";
 import { Link } from "react-router-dom";
+import { useState } from "react";
+import "../App.css";
 
-const SideNav = ({ showNav, handleShow }) => {
+const SideNav = () => {
+    const [showNav, setShowNav] = useState(false);
+
+    const handleShow = () => setShowNav(!showNav);
     return (
-        <Offcanvas show={showNav} onHide={handleShow}>
-            <Offcanvas.Header closeButton>
-                <Offcanvas.Title>Offcanvas</Offcanvas.Title>
-            </Offcanvas.Header>
-            <Offcanvas.Body className="d-flex flex-column">
-                <Link to={'/'}>Posts</Link>
-                <Link to={'/about-me'}>About me</Link>
-            </Offcanvas.Body>
-        </Offcanvas>
-
+        <>
+            <Offcanvas show={showNav} onHide={handleShow}>
+                <Offcanvas.Header closeButton>
+                    <Offcanvas.Title>Hi, there</Offcanvas.Title>
+                </Offcanvas.Header>
+                <Offcanvas.Body className="d-flex flex-column">
+                    <div className="d-flex flex-column align-items-center mb-5">
+                        <Image
+                            roundedCircle
+                            width={100}
+                            height={100}
+                            src="https://img.freepik.com/free-photo/portrait-man-working-laptop_23-2148898741.jpg?w=2000"
+                        />
+                        <h4 className="mt-3">Alen</h4>
+                        <p>bolatovalen@gmail.com</p>
+                    </div>
+                    <div className="d-flex flex-column align-items-center">
+                        <Link
+                            className="text-primary text-decoration-none fs-3 myLink"
+                            onClick={() => setShowNav(false)}
+                            to={"/"}
+                        >
+                            Posts
+                        </Link>
+                        <Link
+                            className="text-primary text-decoration-none fs-3 myLink"
+                            onClick={() => setShowNav(false)}
+                            to={"/about-me"}
+                        >
+                            About me
+                        </Link>
+                    </div>
+                </Offcanvas.Body>
+            </Offcanvas>
+            <Image
+                fluid
+                width={30}
+                height={30}
+                src="../../public/list.svg"
+                onClick={handleShow}
+                className="myImage"
+            />
+        </>
     );
-};
-
-SideNav.propTypes = {
-    showNav: PropTypes.bool.isRequired,
-    handleShow: PropTypes.func.isRequired,
 };
 
 export default SideNav;

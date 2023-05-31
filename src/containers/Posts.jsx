@@ -14,7 +14,7 @@ import Loader from "../components/Loader";
 const Posts = () => {
     const { posts } = useSelector((state) => state.posts);
     const [page, setPage] = useState(1);
-    const [totalPage] = useState(10);
+    const [totalPage] = useState(5);
     const [search, setSearch] = useState("");
     const dispatch = useDispatch();
     const [showLoader, setShowLoader] = useState(false);

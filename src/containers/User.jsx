@@ -33,8 +33,8 @@ const User = () => {
         <Container>
             {showLoader ? (
                 <Loader />
-                ) : (
-                    <div>
+            ) : (
+                <div>
                     <div>{user.name}</div>
                     <h2>Posts</h2>
                     {posts.map((post) => {
