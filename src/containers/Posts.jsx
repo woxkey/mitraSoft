@@ -18,7 +18,6 @@ const Posts = () => {
     const [search, setSearch] = useState("");
     const dispatch = useDispatch();
     const [showLoader, setShowLoader] = useState(false);
-    
 
     useEffect(() => {
         saga.run(postSaga, page);
@@ -39,7 +38,6 @@ const Posts = () => {
 
     return (
         <>
-
             <Container>
                 <div className="d-flex align-items-center pb-5 justify-content-between">
                     <div className="d-flex">
@@ -54,7 +52,6 @@ const Posts = () => {
                             Sort
                         </Button>
                     </div>
-                    
                 </div>
                 <div className="d-flex align-items-center pb-5">
                     <Form.Control

@@ -17,9 +17,9 @@ const SideNav = () => {
                     <div className="d-flex flex-column align-items-center mb-5">
                         <Image
                             roundedCircle
-                            width={100}
-                            height={100}
-                            src="https://img.freepik.com/free-photo/portrait-man-working-laptop_23-2148898741.jpg?w=2000"
+                            width={150}
+                            height={150}
+                            src="../public/photo.jpg"
                         />
                         <h4 className="mt-3">Alen</h4>
                         <p>bolatovalen@gmail.com</p>
