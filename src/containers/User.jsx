@@ -9,6 +9,7 @@ import Button from "react-bootstrap/Button";
 import myUserPostsSaga from "../redux/users/userPostsSaga";
 import { getUserPostsFetch } from "../redux/users/userPostsState";
 import Loader from "../components/Loader";
+import Post from "../components/Post";
 
 const User = () => {
     const params = useParams();
@@ -30,19 +31,35 @@ const User = () => {
     }, [params, dispatch]);
 
     return (
-        <Container>
+        <Container className="pt-3">
+            <Button onClick={() => navigate("/")}>Back</Button>
             {showLoader ? (
                 <Loader />
             ) : (
-                <div>
-                    <div>{user.name}</div>
-                    <h2>Posts</h2>
+                <div className="pt-3">
+                    <div>Name: {user.name}</div>
+                    <div>Username: {user.username}</div>
+                    <div>Email: {user.email}</div>
+                    <div>Phone Number: {user.phone}</div>
+                    <div className="d-flex flex-column mt-5">
+                        {posts.map((post) => {
+                            return (
+                                <Post
+                                    userId={post.userId}
+                                    key={post.id}
+                                    title={post.title}
+                                    body={post.body}
+                                    avatar={"https://spaces.forlanso.com/public/avatar.png"}
+                                    postId={post.id}
+                                />
+                            );
+                        })}
+                    </div>
                     {posts.map((post) => {
                         return <div key={post.id}>{post.title}</div>;
                     })}
                 </div>
             )}
-            <Button onClick={() => navigate("/")}>Back</Button>
         </Container>
     );
 };

@@ -11,7 +11,7 @@ const SideNav = () => {
         <>
             <Offcanvas show={showNav} onHide={handleShow}>
                 <Offcanvas.Header closeButton>
-                    <Offcanvas.Title>Hi, there</Offcanvas.Title>
+                    <Offcanvas.Title>Hi There!</Offcanvas.Title>
                 </Offcanvas.Header>
                 <Offcanvas.Body className="d-flex flex-column">
                     <div className="d-flex flex-column align-items-center mb-5">
