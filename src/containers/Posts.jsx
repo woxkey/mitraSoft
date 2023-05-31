@@ -63,7 +63,7 @@ const Posts = () => {
                     <img
                         onClick={() => setSearch("")}
                         className="myInput"
-                        src="../public/closeBtn.svg"
+                        src="public/closeBtn.svg"
                         alt="#"
                     />
                 </div>

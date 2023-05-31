@@ -19,7 +19,7 @@ const SideNav = () => {
                             roundedCircle
                             width={150}
                             height={150}
-                            src="../public/photo.jpg"
+                            src="./public/photo.jpg"
                         />
                         <h4 className="mt-3">Alen</h4>
                         <p>bolatovalen@gmail.com</p>
@@ -46,7 +46,7 @@ const SideNav = () => {
                 fluid
                 width={30}
                 height={30}
-                src="../../public/list.svg"
+                src="public/list.svg"
                 onClick={handleShow}
                 className="myImage"
             />
