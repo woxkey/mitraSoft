@@ -9,17 +9,23 @@ import MyPagination from "../helpers/MyPagination";
 import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
 import "../App.css";
+import Loader from "../components/Loader";
 
 const Posts = () => {
-    const posts = useSelector((state) => state.posts.posts);
+    const { posts } = useSelector((state) => state.posts);
     const [page, setPage] = useState(1);
     const [totalPage] = useState(5);
     const [search, setSearch] = useState("");
     const dispatch = useDispatch();
+    const [showLoader, setShowLoader] = useState(false);
 
     useEffect(() => {
         saga.run(postSaga, page);
         dispatch(getPostsFetch());
+        setShowLoader(true);
+        setTimeout(() => {
+            setShowLoader(false);
+        }, 500);
     }, [dispatch, page]);
 
     const handleChangePage = useCallback((page) => {
@@ -56,26 +62,30 @@ const Posts = () => {
                     alt="#"
                 />
             </div>
-            <div className="d-flex flex-column">
-                {posts
-                    .filter((post) => {
-                        return search.toLowerCase() === ""
-                            ? post
-                            : post.title.toLowerCase().includes(search);
-                    })
-                    .map((post) => {
-                        return (
-                            <Post
-                                userId={post.userId}
-                                key={post.id}
-                                title={post.title}
-                                body={post.body}
-                                avatar={"https://spaces.forlanso.com/public/avatar.png"}
-                                postId={post.id}
-                            />
-                        );
-                    })}
-            </div>
+            {showLoader ? (
+                <Loader />
+            ) : (
+                <div className="d-flex flex-column">
+                    {posts
+                        .filter((post) => {
+                            return search.toLowerCase() === ""
+                                ? post
+                                : post.title.toLowerCase().includes(search);
+                        })
+                        .map((post) => {
+                            return (
+                                <Post
+                                    userId={post.userId}
+                                    key={post.id}
+                                    title={post.title}
+                                    body={post.body}
+                                    avatar={"https://spaces.forlanso.com/public/avatar.png"}
+                                    postId={post.id}
+                                />
+                            );
+                        })}
+                </div>
+            )}
         </Container>
     );
 };

@@ -14,6 +14,7 @@ const Post = ({ title, body, avatar, postId, userId }) => {
     const openComments = () => {
         setShowComments(!showComments);
         getCommentsByPost();
+        console.log(comments);
     };
 
     const getCommentsByPost = async () => {
@@ -49,7 +50,10 @@ const Post = ({ title, body, avatar, postId, userId }) => {
             <Button onClick={openComments}>Comments</Button>
             {showComments &&
                 comments.map((comment) => {
-                    return <div key={comment.id}>{comment.name}</div>;
+                    return <div key={comment.id}>
+                        <h5>{comment.email}</h5>
+                        <p>{comment.body}</p>
+                    </div>;
                 })}
         </Col>
     );

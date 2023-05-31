@@ -13,8 +13,9 @@ export const postSlice = createSlice({
         },
         getPostsSuccess: (state, action) => {
             state.posts = action.payload;
-            state.isLoading = false;
+            state.isLoading = false
         },
+           
         getPostsFailure: (state) => {
             state.isLoading = false;
         },
@@ -25,6 +26,7 @@ export const postSlice = createSlice({
     },
 });
 
-export const { getPostsFetch, getPostsSuccess, getPostsFailure, sortPosts, sortPostsByInput } = postSlice.actions;
+export const { getPostsFetch, getPostsSuccess, getPostsFailure, sortPosts, sortPostsByInput } =
+    postSlice.actions;
 
 export default postSlice.reducer;

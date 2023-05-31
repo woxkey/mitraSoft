@@ -5,6 +5,7 @@ import { getPostsFailure, getPostsSuccess } from "./postState";
 function* postSaga(page) {
     try {
         console.log(page + "hello");
+        
         const posts = yield call(() =>
             axios.get(`https://jsonplaceholder.typicode.com/posts?_page=${page}&_limit=5`)
         );
