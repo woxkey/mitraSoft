@@ -7,7 +7,7 @@ function* postSaga(page) {
         console.log(page + "hello");
         
         const posts = yield call(() =>
-            axios.get(`https://jsonplaceholder.typicode.com/posts?_page=${page}&_limit=5`)
+            axios.get(`https://jsonplaceholder.typicode.com/posts?_page=${page}&_limit=3`)
         );
         const postsData = posts.data;
         yield put(getPostsSuccess(postsData));

@@ -34,6 +34,7 @@ const Post = ({ title, body, avatar, postId, userId }) => {
     };
 
     return (
+       
         <Col>
             <Image
                 className="myAvatar"

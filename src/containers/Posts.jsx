@@ -14,10 +14,11 @@ import Loader from "../components/Loader";
 const Posts = () => {
     const { posts } = useSelector((state) => state.posts);
     const [page, setPage] = useState(1);
-    const [totalPage] = useState(5);
+    const [totalPage] = useState(10);
     const [search, setSearch] = useState("");
     const dispatch = useDispatch();
     const [showLoader, setShowLoader] = useState(false);
+    
 
     useEffect(() => {
         saga.run(postSaga, page);
@@ -37,56 +38,64 @@ const Posts = () => {
     };
 
     return (
-        <Container>
-            <div className="d-flex align-items-center pb-5">
-                {totalPage > 1 && (
-                    <MyPagination
-                        total={totalPage}
-                        current={page}
-                        onChangePage={handleChangePage}
-                    />
-                )}
-                <Button className="me-3" onClick={handleSort} variant="primary">
-                    Sort
-                </Button>
-                <Form.Control
-                    className="me-3"
-                    value={search}
-                    onChange={(e) => setSearch(e.target.value)}
-                    type="text"
-                />
-                <img
-                    onClick={() => setSearch("")}
-                    className="myInput"
-                    src="../public/closeBtn.svg"
-                    alt="#"
-                />
-            </div>
-            {showLoader ? (
-                <Loader />
-            ) : (
-                <div className="d-flex flex-column">
-                    {posts
-                        .filter((post) => {
-                            return search.toLowerCase() === ""
-                                ? post
-                                : post.title.toLowerCase().includes(search);
-                        })
-                        .map((post) => {
-                            return (
-                                <Post
-                                    userId={post.userId}
-                                    key={post.id}
-                                    title={post.title}
-                                    body={post.body}
-                                    avatar={"https://spaces.forlanso.com/public/avatar.png"}
-                                    postId={post.id}
-                                />
-                            );
-                        })}
+        <>
+
+            <Container>
+                <div className="d-flex align-items-center pb-5 justify-content-between">
+                    <div className="d-flex">
+                        {totalPage > 1 && (
+                            <MyPagination
+                                total={totalPage}
+                                current={page}
+                                onChangePage={handleChangePage}
+                            />
+                        )}
+                        <Button className="me-3" onClick={handleSort} variant="primary">
+                            Sort
+                        </Button>
+                    </div>
+                    
                 </div>
-            )}
-        </Container>
+                <div className="d-flex align-items-center pb-5">
+                    <Form.Control
+                        className="me-3"
+                        value={search}
+                        onChange={(e) => setSearch(e.target.value)}
+                        type="text"
+                    />
+                    <img
+                        onClick={() => setSearch("")}
+                        className="myInput"
+                        src="../public/closeBtn.svg"
+                        alt="#"
+                    />
+                </div>
+                {showLoader ? (
+                    <Loader />
+                ) : (
+                    <div className="d-flex flex-column">
+                        {posts
+                            .filter((post) => {
+                                return search.toLowerCase() === ""
+                                    ? post
+                                    : post.title.toLowerCase().includes(search);
+                            })
+                            .map((post) => {
+                                return (
+                                    <Post
+                                        userId={post.userId}
+                                        key={post.id}
+                                        title={post.title}
+                                        body={post.body}
+                                        avatar={"https://spaces.forlanso.com/public/avatar.png"}
+                                        postId={post.id}
+                                    />
+                                );
+                            })}
+                    </div>
+                )}
+            </Container>
+        </>
     );
 };
 
