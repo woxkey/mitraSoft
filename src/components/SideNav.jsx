@@ -2,6 +2,8 @@ import { Image, Offcanvas } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import { useState } from "react";
 import "../App.css";
+import menu from '../../public/list.svg';
+import myPhoto from '../../public/photo.jpg'
 
 const SideNav = () => {
     const [showNav, setShowNav] = useState(false);
@@ -19,7 +21,7 @@ const SideNav = () => {
                             roundedCircle
                             width={150}
                             height={150}
-                            src="./public/photo.jpg"
+                            src={myPhoto}
                         />
                         <h4 className="mt-3">Alen</h4>
                         <p>bolatovalen@gmail.com</p>
@@ -46,7 +48,7 @@ const SideNav = () => {
                 fluid
                 width={30}
                 height={30}
-                src="public/list.svg"
+                src={menu}
                 onClick={handleShow}
                 className="myImage"
             />

@@ -10,6 +10,7 @@ import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
 import "../App.css";
 import Loader from "../components/Loader";
+import closeBtn from '../../public/closeBtn.svg';
 
 const Posts = () => {
     const { posts } = useSelector((state) => state.posts);
@@ -63,7 +64,7 @@ const Posts = () => {
                     <img
                         onClick={() => setSearch("")}
                         className="myInput"
-                        src="public/closeBtn.svg"
+                        src={closeBtn}
                         alt="#"
                     />
                 </div>
